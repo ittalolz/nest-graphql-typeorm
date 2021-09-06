@@ -3,7 +3,7 @@
 Repositório para treinamento.
 
 
-## Descrição
+## Objetivo
 
 Criar Api usando Nest+GraphQL+TypeORM
 
