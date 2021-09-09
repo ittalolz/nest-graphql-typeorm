@@ -1,12 +1,12 @@
-import { Field, ObjectType } from 'type-graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import {
-  Column,
-  CreateDateColumn,
   Entity,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  Column,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import User from './user.entity';
 
@@ -16,6 +16,10 @@ export default class Message {
   @Field()
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Field()
+  @Column({ name: 'user_id' })
+  userId: number;
 
   @Field()
   @Column()
@@ -29,8 +33,11 @@ export default class Message {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
+  @Field(() => User)
+  user: User;
+
   // Associations
-  @ManyToOne(() => User, (user) => user.userConnection, { primary: true })
+  @ManyToOne(() => User, (user) => user.messageConnection, { primary: true })
   @JoinColumn({ name: 'user_id' })
-  messageConnection: Promise<Message>;
+  userConnection: Promise<User>;
 }

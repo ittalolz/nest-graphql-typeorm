@@ -1,4 +1,4 @@
-import { Field, ObjectType } from 'type-graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -18,10 +18,6 @@ export default class User {
 
   @Field()
   @Column()
-  name: string;
-
-  @Field()
-  @Column()
   email: string;
 
   @Field()
@@ -33,6 +29,6 @@ export default class User {
   updatedAt: Date;
 
   // Associations
-  @OneToMany(() => Message, (message) => message.messageConnection)
-  userConnection: Promise<Message[]>;
+  @OneToMany(() => Message, (message) => message.userConnection)
+  messageConnection: Promise<Message[]>;
 }
